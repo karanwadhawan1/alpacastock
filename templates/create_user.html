@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Custom Admin Title{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg " style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'admin_panel' %}">Admin Panel</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'create_user' %}">Create User</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUserModal">Create User</button>
+
+    <!-- User Data Modal -->
+    <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createUserModalLabel">User Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Display user data here -->
+                    <!-- Replace this with your actual user data -->
+
+                    <!-- Example: -->
+                    <p>Email: user@example.com</p>
+                    <p>Name: John Doe</p>
+
+                    <!-- Add more user details as needed -->
+
+                    <!-- Buttons for Update and Delete -->
+                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateUserModal">Update User</button>
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteUserModal">Delete User</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update User Modal -->
+    <div class="modal fade" id="updateUserModal" tabindex="-1" aria-labelledby="updateUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateUserModalLabel">Update User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Add your update user form here -->
+                    <!-- Example form: -->
+                    <form>
+                        <div class="mb-3">
+                            <label for="updateEmail" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="updateEmail" placeholder="user@example.com" required>
+                        </div>
+                        <!-- Add more form fields for updating user details -->
+
+                        <button type="submit" class="btn btn-primary">Update User</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete User Modal -->
+    <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteUserModalLabel">Delete User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Add your delete user confirmation message here -->
+                    <p>Are you sure you want to delete this user?</p>
+
+                    <!-- Add a form for handling the delete action -->
+                    {% comment %} <form method="post" action="{% url 'delete_user' %}"> {% endcomment %}
+                    <form method="post" action="">
+
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete User</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block footer %}
+<footer class="bg-light text-center text-lg-start mt-4 fixed-bottom">
+    <div class="text-center p-3">
+        &copy; 2024 Your Company
+    </div>
+</footer>
+{% endblock %}
